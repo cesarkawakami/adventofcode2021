@@ -1,0 +1,60 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "AOC Build",
+            "command": "/opt/homebrew/opt/llvm/bin/clang++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++2b",
+                "-O0",
+                "-g",
+                "-fsanitize=address,undefined",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "AOC Run",
+            "command": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [
+                "<",
+                "${fileDirname}/${input:inputName}",
+                ";",
+                "echo", "EXIT", "CODE:", "$?"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "dependsOn": [
+                "AOC Build"
+            ],
+            "detail": "compiler: exec",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ],
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "inputName",
+            "description": "Which input file?",
+            "default": "in1",
+            "type": "promptString"
+        }
+    ]
+}
