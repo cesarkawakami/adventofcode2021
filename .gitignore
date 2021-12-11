@@ -37,5 +37,6 @@
 # binaries
 day*/*
 !day*/*.*
+!day*/in*
 day*/*.dSYM
 day*/*.o
