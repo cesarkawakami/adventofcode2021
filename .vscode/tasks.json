@@ -43,11 +43,7 @@
             },
             "problemMatcher": [
                 "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            ]
         },
         {
             "type": "shell",
@@ -57,7 +53,10 @@
                 "<",
                 "${fileDirname}/${input:inputName}",
                 ";",
-                "echo", "EXIT", "CODE:", "$?"
+                "echo",
+                "EXIT",
+                "CODE:",
+                "$?"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -74,14 +73,17 @@
         {
             "type": "shell",
             "label": "AOC Run Optimized",
-            "command": "/usr/bin/time",
+            "command": "/opt/homebrew/bin/gtime",
             "args": [
-                "-hl",
+                "-v",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "<",
                 "${fileDirname}/${input:inputName}",
                 ";",
-                "echo", "EXIT", "CODE:", "$?"
+                "echo",
+                "EXIT",
+                "CODE:",
+                "$?"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -90,10 +92,7 @@
                 "AOC Build Optimized"
             ],
             "detail": "compiler: exec",
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            }
+            "problemMatcher": []
         }
     ],
     "version": "2.0.0",
