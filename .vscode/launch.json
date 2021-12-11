@@ -5,15 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
             "name": "Debug with input",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [
-                "<",
-                "${fileDirname}/${input:inputName}"
-            ],
-            "miDebuggerPath": "/usr/bin/gdb",
+            // "args": [
+            //     "<",
+            //     "${fileDirname}/${input:inputName}"
+            // ],
+            "stdio": ["${fileDirname}/${input:inputName}"],
+            "miDebuggerPath": "/opt/lldb-mi-brew/build/src/lldb-mi",
             "cwd": "${workspaceFolder}"
         }
     ],

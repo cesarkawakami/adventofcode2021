@@ -26,6 +26,30 @@
             }
         },
         {
+            "type": "cppbuild",
+            "label": "AOC Build Optimized",
+            "command": "/opt/homebrew/opt/llvm/bin/clang++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++2b",
+                "-O3",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "type": "shell",
             "label": "AOC Run",
             "command": "${fileDirname}/${fileBasenameNoExtension}",
@@ -40,6 +64,30 @@
             },
             "dependsOn": [
                 "AOC Build"
+            ],
+            "detail": "compiler: exec",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "AOC Run Optimized",
+            "command": "/usr/bin/time",
+            "args": [
+                "-hl",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "<",
+                "${fileDirname}/${input:inputName}",
+                ";",
+                "echo", "EXIT", "CODE:", "$?"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "dependsOn": [
+                "AOC Build Optimized"
             ],
             "detail": "compiler: exec",
             "group": {
