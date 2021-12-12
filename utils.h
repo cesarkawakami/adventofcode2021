@@ -108,12 +108,22 @@ void bench(const std::string &name, const std::string &expected, int iterations,
         timings.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / 1000.);
         // timings.push_back(1000000. * (end - start) / CLOCKS_PER_SEC);
     }
-    std::cout << "  Done.\n";
+    std::cout << "  Done.\n\n";
+    for (int i = 0; i < 5; ++i) {
+        if (i >= std::ssize(timings)) {
+            break;
+        }
+        std::cout << "  run" << i + 1 << ": " << timings[i] << " us\n";
+    }
     std::sort(timings.begin(), timings.end());
     std::cout << "\n";
     std::cout << "  pMin: " << timings[0] << " us\n";
     std::cout << "  p5  : " << timings[std::ssize(timings) / 20] << " us\n";
     std::cout << "  p50 : " << timings[std::ssize(timings) / 2] << " us\n";
+    std::cout << "  p95 : " << timings[std::ssize(timings) - std::ssize(timings) / 20] << " us\n";
+    std::cout << "  pMax: " << timings[std::ssize(timings) - 1] << " us\n";
+
+
 }
 
 // void timed_solve(auto solver) {
