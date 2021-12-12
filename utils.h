@@ -3,6 +3,7 @@
 #include <iostream>
 #include <locale>
 #include <vector>
+#include <sstream>
 
 struct CPUTimer {
     std::clock_t start;
@@ -27,3 +28,18 @@ struct AoCCType : std::ctype<char> {
         std::cin.imbue(std::locale(std::cin.getloc(), &aoc_ctype));
     }
 };
+
+void timed_solve(auto solver) {
+    const int BUF_SIZE = 100000;
+    static char buf[BUF_SIZE];
+    std::cin.read(buf, BUF_SIZE - 1);
+    int len = std::cin.gcount();
+    buf[len] = 0;
+    std::istringstream iss{buf};
+    std::ostringstream oss;
+    {
+        CPUTimer timer;
+        solver(iss, oss);
+    }
+    std::cout << oss.str();
+}

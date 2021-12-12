@@ -10,6 +10,9 @@
                 "-O0",
                 "-g",
                 "-fsanitize=address,undefined",
+                "-Wall",
+                "-Wextra",
+                "-I${workspaceFolder}",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
@@ -34,6 +37,9 @@
                 "-std=c++2b",
                 "-O3",
                 "-g",
+                "-Wall",
+                "-Wextra",
+                "-I${workspaceFolder}",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
