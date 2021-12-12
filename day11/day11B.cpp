@@ -1,9 +1,9 @@
+#include "utils.h"
 #include <algorithm>
 #include <ctime>
 #include <iostream>
 #include <numeric>
 #include <vector>
-#include "utils.h"
 
 const int N = 10;
 
@@ -34,10 +34,10 @@ struct InlineStack {
 struct Octopi {
     int8_t data[N][N];
 
-    void read() {
+    void read(std::istream &is) {
         std::string s;
         for (int r = 0; r < N; ++r) {
-            std::cin >> s;
+            is >> s;
             for (int c = 0; c < N; ++c) {
                 data[r][c] = s[c] - '0';
             }
@@ -87,20 +87,27 @@ struct Octopi {
     }
 };
 
-int main() {
+auto solve_part_2{[](std::istream &is, std::ostream &os) {
     Octopi octopi{};
-    octopi.read();
+    octopi.read(is);
 
     int part_2_answer;
-    {
-        CPUTimer timer;
-        for (int step_number = 1;; ++step_number) {
-            int flash_count = octopi.step();
-            if (flash_count == N * N) {
-                part_2_answer = step_number;
-                break;
-            }
+    for (int step_number = 1;; ++step_number) {
+        int flash_count = octopi.step();
+        if (flash_count == N * N) {
+            part_2_answer = step_number;
+            break;
         }
     }
-    std::cout << "part 2 answer: " << part_2_answer << "\n";
+    os << part_2_answer;
+}};
+
+int main() {
+    {
+        utils::Tester tester;
+        tester.test("part2", "in1", "195", solve_part_2);
+        tester.test("part2", "in2", "212", solve_part_2);
+    }
+
+    utils::bench("part2", "in2", "212", 1000, solve_part_2);
 }

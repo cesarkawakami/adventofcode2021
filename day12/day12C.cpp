@@ -118,17 +118,17 @@ auto solve_part_2 = [](std::istream &is, std::ostream &os) {
     Solver solver{};
     solver.read(is);
     int part_2_answer = solver.solve();
-    os << "part 2 answer: " << part_2_answer << "\n";
+    os << part_2_answer;
 };
 
 int main() {
     {
         utils::Tester tester;
-        tester.test("in1", "36", solve_part_2);
-        tester.test("in2", "103", solve_part_2);
-        tester.test("in3", "3509", solve_part_2);
-        tester.test("in4", "117095", solve_part_2);
+        tester.test("part2", "in1", "36", solve_part_2);
+        tester.test("part2", "in2", "103", solve_part_2);
+        tester.test("part2", "in3", "3509", solve_part_2);
+        tester.test("part2", "in4", "117095", solve_part_2);
     }
 
-    utils::bench("in4", "117095", 10000, solve_part_2);
+    utils::bench("part2", "in4", "117095", 10000, solve_part_2);
 }
