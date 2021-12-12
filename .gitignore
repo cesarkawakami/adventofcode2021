@@ -40,3 +40,8 @@ day*/*
 !day*/in*
 day*/*.dSYM
 day*/*.o
+day*/*.exp
+day*/*.ilk
+day*/*.lib
+day*/*.pdb
+day*/*.exe

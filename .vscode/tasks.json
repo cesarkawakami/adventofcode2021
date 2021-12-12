@@ -3,7 +3,7 @@
         {
             "type": "cppbuild",
             "label": "AOC Build",
-            "command": "/opt/homebrew/opt/llvm/bin/clang++",
+            "command": "C:\\Program Files\\LLVM\\bin\\clang++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-std=c++2b",
@@ -15,7 +15,7 @@
                 "-I${workspaceFolder}",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -23,6 +23,14 @@
             "problemMatcher": [
                 "$gcc"
             ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -31,7 +39,7 @@
         {
             "type": "cppbuild",
             "label": "AOC Build Optimized",
-            "command": "/opt/homebrew/opt/llvm/bin/clang++",
+            "command": "C:\\Program Files\\LLVM\\bin\\clang++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-std=c++2b",
@@ -42,28 +50,28 @@
                 "-I${workspaceFolder}",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
-            ]
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            }
         },
         {
             "type": "shell",
-            "label": "AOC Run",
-            "command": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [
-                "<",
-                "${fileDirname}/${input:inputName}",
-                ";",
-                "echo",
-                "EXIT",
-                "CODE:",
-                "$?"
-            ],
+            "label": "AOC Test",
+            "command": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "args": [],
             "options": {
                 "cwd": "${fileDirname}"
             },
@@ -78,19 +86,9 @@
         },
         {
             "type": "shell",
-            "label": "AOC Run Optimized",
-            "command": "/opt/homebrew/bin/gtime",
-            "args": [
-                "-v",
-                "${fileDirname}/${fileBasenameNoExtension}",
-                "<",
-                "${fileDirname}/${input:inputName}",
-                ";",
-                "echo",
-                "EXIT",
-                "CODE:",
-                "$?"
-            ],
+            "label": "AOC Test Optimized",
+            "command": "${fileDirname}/${fileBasenameNoExtension}.exe",
+            "args": [],
             "options": {
                 "cwd": "${fileDirname}"
             },
@@ -98,16 +96,11 @@
                 "AOC Build Optimized"
             ],
             "detail": "compiler: exec",
-            "problemMatcher": []
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
         }
     ],
-    "version": "2.0.0",
-    "inputs": [
-        {
-            "id": "inputName",
-            "description": "Which input file?",
-            "default": "in1",
-            "type": "promptString"
-        }
-    ]
+    "version": "2.0.0"
 }

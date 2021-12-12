@@ -14,7 +14,7 @@
             //     "${fileDirname}/${input:inputName}"
             // ],
             "stdio": ["${fileDirname}/${input:inputName}"],
-            "miDebuggerPath": "/opt/lldb-mi-brew/build/src/lldb-mi",
+            // "miDebuggerPath": "/opt/lldb-mi-brew/build/src/lldb-mi",
             "cwd": "${workspaceFolder}"
         }
     ],
