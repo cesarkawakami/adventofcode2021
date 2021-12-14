@@ -14,20 +14,18 @@ namespace utils {
 const bool BENCH_DISPLAY_INITIAL_RUNS = false;
 
 template <char... WhiteSpaceChars>
-struct AoCCType : std::ctype<char> {
+struct WhitespaceCtype : std::ctype<char> {
     static const mask *make_table() {
-        static mask table[table_size]{};
-        std::copy(classic_table(), classic_table() + table_size, table);
-        std::for_each(table, table + table_size, [](mask &m) { m &= ~space; });
+        static std::vector<mask> table(classic_table(), classic_table() + table_size);
+        std::for_each(table.begin(), table.end(), [](mask &m) { m &= ~space; });
         for (char c : {WhiteSpaceChars...}) {
-            table[c] |= space;
+            table[int{c}] |= space;
         }
-        return table;
+        return &table[0];
     }
-    AoCCType(std::size_t refs = 0) : ctype(make_table(), false, refs) {}
+    WhitespaceCtype(std::size_t refs = 0) : ctype(make_table(), false, refs) {}
     static void imbue(std::istream &is) {
-        static AoCCType aoc_ctype;
-        is.imbue(std::locale(is.getloc(), &aoc_ctype));
+        is.imbue(std::locale(is.getloc(), new WhitespaceCtype));
     }
 };
 
@@ -57,10 +55,25 @@ struct Tester {
         std::cout << "RESULT (" << display_name.str() << "): ";
         std::ostringstream msg;
         bool ok = output == expected;
+
+        auto shorten = [](const std::string &s) {
+            auto lim = s.length();
+            if (lim > 50) {
+                lim = 50;
+            }
+            if (auto p = s.find('\n'); p != std::string::npos && p < lim) {
+                lim = p;
+            }
+            if (lim < s.length()) {
+                return s.substr(0, lim) + "...OMIT...";
+            } else {
+                return s;
+            }
+        };
         if (ok) {
-            msg << "OK!   got " << output;
+            msg << "OK!   got " << shorten(output);
         } else {
-            msg << "FAIL! got " << output << " expected " << expected;
+            msg << "FAIL! got " << shorten(output) << " expected " << shorten(expected);
         }
         std::cout << msg.str() << "\n";
         results.push_back({display_name.str(), ok, msg.str()});

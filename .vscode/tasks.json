@@ -1,6 +1,11 @@
 {
     "tasks": [
         {
+            "type": "shell",
+            "label": "AOC Clear",
+            "command": "if (Test-Path ${fileDirname}/${fileBasenameNoExtension}.exe) { rm ${fileDirname}/${fileBasenameNoExtension}.exe }"
+        },
+        {
             "type": "cppbuild",
             "label": "AOC Build",
             "command": "C:\\Program Files\\LLVM\\bin\\clang++",
@@ -20,6 +25,7 @@
             "options": {
                 "cwd": "${fileDirname}"
             },
+            "dependsOn": ["AOC Clear"],
             "problemMatcher": [
                 "$gcc"
             ],
@@ -55,6 +61,7 @@
             "options": {
                 "cwd": "${fileDirname}"
             },
+            "dependsOn": ["AOC Clear"],
             "problemMatcher": [
                 "$gcc"
             ],

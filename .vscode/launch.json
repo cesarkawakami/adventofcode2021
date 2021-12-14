@@ -7,23 +7,9 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug with input",
+            "name": "Debug",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            // "args": [
-            //     "<",
-            //     "${fileDirname}/${input:inputName}"
-            // ],
-            "stdio": ["${fileDirname}/${input:inputName}"],
-            // "miDebuggerPath": "/opt/lldb-mi-brew/build/src/lldb-mi",
             "cwd": "${workspaceFolder}"
-        }
-    ],
-    "inputs": [
-        {
-            "id": "inputName",
-            "description": "Which input file?",
-            "default": "in1",
-            "type": "promptString"
         }
     ]
 }
