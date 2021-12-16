@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Debug",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "cwd": "${workspaceFolder}"
+            "cwd": "${fileDirname}"
         }
     ]
 }
